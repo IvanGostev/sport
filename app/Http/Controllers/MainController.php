@@ -12,4 +12,8 @@ class MainController extends Controller
     {
         return view('show', compact('user'));
     }
+
+    public function terms() {
+        return view('terms');
+    }
 }

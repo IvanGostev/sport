@@ -4,6 +4,56 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Контакты</h3>
+                    <form class="card-tools" method="post" action="{{route('contact.store')}}">
+                        @csrf
+                        <div class="input-group input-group-sm">
+                            <input required type="text" name="name" class="form-control float-right" placeholder="Имя">
+                            <input required type="text" name="role" class="form-control float-right" placeholder="Кем приходиться">
+                            <input required type="text" name="type" class="form-control float-right" placeholder="Тип контакта">
+                            <input required type="text" name="contact" class="form-control float-right" placeholder="Контакт">
+                            <div class="input-group-append" style="margin-left: 5px;">
+                                <button type="submit" class="btn btn-outline-light">Добавить</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>Имя</th>
+                            <th>Кем приходиться</th>
+                            <th>Тип контакта</th>
+                            <th>Контакт</th>
+                            <th style="width: 40px"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach(auth()->user()->contacts() as $contact)
+                            <tr>
+                                <td>{{$contact->name}}</td>
+                                <td>{{$contact->role}}</td>
+                                <td>{{$contact->type}}</td>
+                                <td>{{$contact->contact}}</td>
+                                <td>
+                                    <form method="post" action="{{route('contact.delete', $contact->id)}}">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-sm btn-light">Удалить</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <br>
             <form class="card" method="post" action="{{route('profile.update')}}" enctype="multipart/form-data">
                 @csrf
                 @method('patch')
@@ -70,56 +120,6 @@
                 </div>
 
             </form>
-            <br>
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Контакты</h3>
-                    <form class="card-tools" method="post" action="{{route('contact.store')}}">
-                        @csrf
-                        <div class="input-group input-group-sm">
-                            <input required type="text" name="name" class="form-control float-right" placeholder="Имя">
-                            <input required type="text" name="role" class="form-control float-right" placeholder="Кем приходиться">
-                            <input required type="text" name="type" class="form-control float-right" placeholder="Тип контакта">
-                            <input required type="text" name="contact" class="form-control float-right" placeholder="Контакт">
-                            <div class="input-group-append" style="margin-left: 5px;">
-                                <button type="submit" class="btn btn-outline-light">Добавить</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
-                        <thead>
-                        <tr>
-                            <th>Имя</th>
-                            <th>Кем приходиться</th>
-                            <th>Тип контакта</th>
-                            <th>Контакт</th>
-                            <th style="width: 40px"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach(auth()->user()->contacts() as $contact)
-                            <tr>
-                                <td>{{$contact->name}}</td>
-                                <td>{{$contact->role}}</td>
-                                <td>{{$contact->type}}</td>
-                                <td>{{$contact->contact}}</td>
-                                <td>
-                                    <form method="post" action="{{route('contact.delete', $contact->id)}}">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-sm btn-light">Удалить</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
         </div>
     </div>
 </div>

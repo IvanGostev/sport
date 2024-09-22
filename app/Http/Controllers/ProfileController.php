@@ -12,14 +12,12 @@ class ProfileController extends Controller
 {
 
     public function show() {
-        $qrcode = QrCode::size(200)->format('png')->style('square')->generate(route('main.show', auth()->user()->id));
+        $qrcode = QrCode::size(200)->style('square')->generate(route('main.show', auth()->user()->id));
         return view('profile', compact('qrcode'));
     }
 
 
     public function update(Request $request) {
-
-
         $data = $request->validate([
             'name' => ['required'],
             'phone' => ['required'],
