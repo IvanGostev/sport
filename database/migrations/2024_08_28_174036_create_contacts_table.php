@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('role');
             $table->text('type');
             $table->text('contact');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

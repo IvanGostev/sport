@@ -17,7 +17,10 @@
                         <div class="card-body" style="height: 14vh;
     overflow: hidden;
     text-overflow: ellipsis; ">
-                            <h5 class="card-title">{{$product->title}}</h5>
+                            <div class="d-flex justify-content-between">
+                                <h5 class="card-title">{{$product->title}}</h5>  <span class="badge right fs-6">{{$product->price . ' руб'}}</span>
+                            </div>
+
                             <p class="card-text">{{$product->description}}</p>
                         </div>
                     </a>
@@ -28,7 +31,7 @@
 
         </div>
         <div>
-            {{$products->links()}}
+            {{$products->links('pagination::bootstrap-5')}}
         </div>
     </div>
 @endsection

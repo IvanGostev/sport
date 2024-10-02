@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{  config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Google Font: Source Sans Pro -->
@@ -24,8 +24,14 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 </head>
+<style>
+    .dark-mode .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .dark-mode .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+        background-color: #fff;
+        color: black;
+    }
+</style>
 {{--        dark-mode--}}
-<body class="dark-mode hold-transition  sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="dark-mode hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 
     <!-- Preloader -->
@@ -42,19 +48,14 @@
             </li>
         </ul>
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a href="{{route('balance.show')}}" class="nav-link">Balance: <span class="fw-bold">{{auth()->user()->balance}} RUB</span>
-                </a>
-            </li>
-
 
             <li class="nav-item">
                 <form action="{{route('logout')}}" method="post">
                     @csrf
                     <button type="submit"
-                            class="btn btn-outline-light fw-normal">Logout</button>
+                            class="btn btn-outline-light fw-normal">Выйти
+                    </button>
                 </form>
-
             </li>
         </ul>
     </nav>
@@ -72,7 +73,7 @@
 
     <!-- Main Sidebar Container -->
 
-    @include('includes.sidebar')
+    @include('admin.includes.sidebar')
 
     <!-- Content Wrapper. Contains page content -->
     @yield('content')
@@ -208,8 +209,52 @@
     })
 
 </script>
+<script src="{{ asset('plugins/chart.js/Chart.min.js')}}"></script>
+
 <form hidden="hidden" id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
     @csrf
 </form>
+<script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
+<script src="https://bootstraptema.ru/plugins/2016/shieldui/script.js"></script>
+@if(isset($transitionsForChartAdvertiserLink))
+    <script>
+        $(document).ready(function () {
+            $("#chartAdvertiserLink").shieldChart({
+                theme: "dark",
+                primaryHeader: {
+                    text: "The number of clicks on the advertised link"
+                },
+                exportOptions: {
+                    image: false,
+                    print: false
+                },
+                axisX: {
+                    categoricalValues: [
+                        @foreach($transitionsForChartAdvertiserLink as $transition)
+                            "{{$transition->date}}",
+                        @endforeach
+                    ]
+                },
+                tooltipSettings: {
+                    chartBound: true,
+                    axisMarkers: {
+                        enabled: true,
+                        mode: 'xy'
+                    }
+                },
+                dataSeries: [{
+                    seriesType: 'line',
+                    collectionAlias: "Number of clicks",
+                    data: [
+                        @foreach($transitionsForChartAdvertiserLink as $transition)
+                            {{$transition->views}},
+                        @endforeach
+                    ]
+                }],
+                backgroundColor: "#212529",
+            });
+        });
+    </script><!-- /.График -->
+@endif
 </body>
 </html>

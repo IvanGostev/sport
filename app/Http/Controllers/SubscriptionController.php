@@ -16,7 +16,10 @@ class SubscriptionController extends Controller
 
     public function show()
     {
-        $subscription = 0;
-        return view('subscription', compact('subscription'));
+        return view('subscription');
+    }
+    public function buy()
+    {
+
     }
 }

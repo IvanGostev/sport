@@ -17,15 +17,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-
-
+            $table->string('role')->default('user');
             $table->text('phone')->nullable();
             $table->string('type')->default('standard');
             $table->string('img')->default('/images/placeholder.png');
             $table->longText('information')->nullable();
-
-
-            $table->date('paid')->nullable();
+            $table->integer('subscription_months')->nullable();
+            $table->date('day_pay')->nullable(); // день в который оплатили
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

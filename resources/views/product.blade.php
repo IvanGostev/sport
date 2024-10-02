@@ -3,7 +3,7 @@
 
     <div class="container">
         <div class="card">
-            <div class="row" style="height: 50vh">
+            <div class="row" style="min-height: 50vh">
                 <aside class="col-sm-5 border-right">
                     <article class="gallery-wrap">
                         <div class="img-big-wrap" style="height: 50vh">
@@ -29,66 +29,73 @@
                                 <dd><p class="fs-5">{{$product->description}}</p></dd>
                             </dl>
                         </div>
+                        @if(!checkProductInCart($product->id))
+                            <div class="row align-items-end">
+                                <hr>
+                                <div class="col-sm-5">
+                                    <dl class="param param-inline">
+                                        <dt class="fs-5 mb-1">Количество:</dt>
+                                        <dd>
+                                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                                <button data-mdb-button-init data-mdb-ripple-init
+                                                        class="btn btn-link px-2"
+                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
 
+                                                <input id="form1" min="0" name="quantity" value="1" type="number"
+                                                       style="width: 4vw;"
+                                                       class="form-control fs-6"/>
 
-                        <div class="row align-items-end">
-                            <hr>
-                            <div class="col-sm-5">
-                                <dl class="param param-inline">
-                                    <dt class="fs-5 mb-1">Количество:</dt>
-                                    <dd>
-                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
+                                                <button data-mdb-button-init data-mdb-ripple-init
+                                                        class="btn btn-link px-2"
+                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </dd>
+                                    </dl>  <!-- item-property .// -->
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
 
-                                            <input id="form1" min="0" name="quantity" value="1" type="number"
-                                                   style="width: 4vw;"
-                                                   class="form-control fs-6"/>
+                            {{--                        <a href="#" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>--}}
 
-                                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </dd>
-                                </dl>  <!-- item-property .// -->
-                            </div> <!-- col.// -->
-                        </div> <!-- row.// -->
-
-                        {{--                        <a href="#" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>--}}
-
-                        <button  class="btn btn-lg btn-outline-primary text-uppercase"><i
-                                class="fas fa-shopping-cart"></i> Добавить в корзину
-                        </button>
-
-                        </form> <!-- card-body.// -->
+                            <button class="btn btn-lg btn-outline-primary text-uppercase"><i
+                                    class="fas fa-shopping-cart"></i> Добавить в корзину
+                            </button>
+                        @else
+                            <a href="{{route('cart.index')}}" class="btn btn-lg btn-primary text-uppercase"><i
+                                    class="fas fa-shopping-cart"></i> В корзине
+                            </a>
+                        @endif
+                    </form> <!-- card-body.// -->
                 </aside> <!-- col.// -->
             </div> <!-- row.// -->
 
         </div>
         <br>
-        <div class="row row-cols-1 row-cols-md-4">
-            @foreach($products as $product)
-                <div class="col mb-3">
-                    <a class="card vh-40" href="{{route('product.show', $product)}}">
-                        <div class="d-flex" style="height: 25vh">
-                            <img src="{{$product->image}}" class="card-img-top" alt="{{$product->title}}">
-                        </div>
 
-                        <div class="card-body" style="height: 14vh;
+            <div class="row row-cols-1 row-cols-md-4">
+                @foreach($products as $product)
+                    <div class="col mb-3">
+                        <a class="card vh-40" href="{{route('product.show', $product)}}">
+                            <div class="d-flex" style="height: 25vh">
+                                <img src="{{$product->image}}" class="card-img-top" alt="{{$product->title}}">
+                            </div>
+
+                            <div class="card-body" style="height: 14vh;
     overflow: hidden;
     text-overflow: ellipsis; ">
-                            <h5 class="card-title">{{$product->title}}</h5>
-                            <p class="card-text">{{$product->description}}</p>
-                        </div>
-                    </a>
-                </div>
+                                <h5 class="card-title">{{$product->title}}</h5>
+                                <p class="card-text">{{$product->description}}</p>
+                            </div>
+                        </a>
+                    </div>
 
-            @endforeach
+                @endforeach
 
 
-        </div>
+            </div>
+
     </div>
 @endsection

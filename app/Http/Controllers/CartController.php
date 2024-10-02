@@ -12,7 +12,7 @@ class CartController extends Controller
     public function index()
     {
         $products = Cart::instance('cart')->content();
-        $total = Cart::instance('cart')->total();
+        $total = Cart::instance('cart')->subTotal();
         return view('cart', compact('products', 'total'));
     }
 
@@ -26,15 +26,13 @@ class CartController extends Controller
                 'price' => $product->price,
                 'options' => ['description' => $product->description]
             ])->associate(Product::class);
-        session()->flash('success', 'Product is Added to Cart Successfully !');
-        return response()->json(['status' => 200, 'message' => 'Success ! Item Successfully added to your cart.']);
+
+        return back();
     }
 
-    public function quantity($rowId, $number)
+    public function quantity($rowId, Request $request)
     {
-        $product = Cart::instance('cart')->get($rowId);
-        $qty = $product->qty = $number;
-        Cart::instance('cart')->update($rowId, $qty);
+        Cart::instance('cart')->update($rowId, $request->quantity);
         return redirect()->back();
     }
 

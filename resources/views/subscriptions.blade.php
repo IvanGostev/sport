@@ -13,48 +13,21 @@
                 </div>
 
                 <main>
-                    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                    <div class="row row-cols-1 row-cols-md-2 mb-2 text-center">
                         <div class="col">
                             <div class="card mb-4 rounded-3 shadow-sm">
                                 <div class="card-header py-3">
                                     <h4 class="my-0 fw-normal">Месяц</h4>
                                 </div>
-                                <div class="card-body" style="height: 31vh;  display: flex;
-  flex-direction: column;  ">
-                                    <div style="height: 25vh; display: flex;
-  flex-direction: column; justify-content: flex-start;">
-                                        <h1 class="card-title pricing-card-title">2000 руб</h1>
-                                        <p class="list-unstyled mt-3 mb-4">
-                                            10 users included
-                                            2 GB of storage
-                                            Email support
-                                            Help center access
-                                        </p>
-                                    </div>
-                                    <div style="height: 6vh; display: flex;
-  flex-direction: column; justify-content: flex-end;" >
-                                        <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for
-                                            free
-                                        </button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-4 rounded-3 shadow-sm">
-                                <div class="card-header py-3">
-                                    <h4 class="my-0 fw-normal">Пол года</h4>
-                                </div>
                                 <div class="card-body">
-                                    <h1 class="card-title pricing-card-title">4500 руб</h1>
+                                    <h1 class="card-title pricing-card-title">200 руб</h1>
                                     <ul class="list-unstyled mt-3 mb-4">
-                                        <li>20 users included</li>
-                                        <li>10 GB of storage</li>
-                                        <li>Priority email support</li>
-                                        <li>Help center access</li>
+                                        <li>Количество устройств 10</li>
+                                        <li>Количество аккаунтов 14</li>
+                                        <li>Количество устройств 15</li>
+                                        <li>Количество аккаунтов 18</li>
                                     </ul>
-                                    <button type="button" class="w-100 btn btn-lg btn-primary">Get started</button>
+                                    <button type="button" class="w-100 btn btn-lg btn-primary">Приобрести</button>
                                 </div>
                             </div>
                         </div>
@@ -64,14 +37,14 @@
                                     <h4 class="my-0 fw-normal">Год</h4>
                                 </div>
                                 <div class="card-body">
-                                    <h1 class="card-title pricing-card-title">6500 руб</h1>
+                                    <h1 class="card-title pricing-card-title">999 руб</h1>
                                     <ul class="list-unstyled mt-3 mb-4">
-                                        <li>30 users included</li>
-                                        <li>15 GB of storage</li>
-                                        <li>Phone and email support</li>
-                                        <li>Help center access</li>
+                                        <li>Количество устройств 10</li>
+                                        <li>Количество аккаунтов 14</li>
+                                        <li>Количество устройств 15</li>
+                                        <li>Количество аккаунтов 18</li>
                                     </ul>
-                                    <button type="button" class="w-100 btn btn-lg btn-primary">Contact us</button>
+                                    <button type="button" class="w-100 btn btn-lg btn-primary">Приобрести</button>
                                 </div>
                             </div>
                         </div>
