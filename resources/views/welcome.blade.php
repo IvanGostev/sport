@@ -72,7 +72,7 @@
     {{--       data-property="{videoURL:'https://www.youtube.com/watch?v=w-cRWOjlk8c',showYTLogo:false, showAnnotations: false, showControls: false, cc_load_policy: false, containment:'#home-section',autoPlay:true, mute:true, startAt:255, stopAt: 271, opacity:1}">--}}
     {{--    </a>--}}
 
-    <div class="intro-section" id="home-section" style="background-image: ">
+    <div class="intro-section" id="home-section">
         <div class="container">
 
             <div class="row align-items-center">
@@ -96,7 +96,7 @@
         <div class="container">
 
             <div class="row justify-content-center align-items-center text-left mb-5">
-                <div class="col-md-8 section-heading">
+                <div class="col-md-12 section-heading">
                     <h2 class="heading mb-3 text-center">Для кого</h2>
                     <p>
                     <ul class="list-unstyled">
