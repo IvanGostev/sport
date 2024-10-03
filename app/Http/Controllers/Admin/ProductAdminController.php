@@ -40,7 +40,7 @@ class ProductAdminController extends Controller
     }
 
     function edit(Product $product) {
-        return view('admin.product.edit', compact($product));
+        return view('admin.product.edit', compact('product'));
     }
     function update(Request $request, Product $product) {
         $data = $request->all();

@@ -14,14 +14,12 @@
                             <img src="{{$product->image}}" class="card-img-top" alt="{{$product->title}}">
                         </div>
 
-                        <div class="card-body" style="height: 14vh;
+                        <div class="card-body" style="height: 12vh;
     overflow: hidden;
     text-overflow: ellipsis; ">
                             <div class="d-flex justify-content-between">
                                 <h5 class="card-title">{{$product->title}}</h5>  <span class="badge right fs-6">{{$product->price . ' руб'}}</span>
                             </div>
-
-                            <p class="card-text">{{$product->description}}</p>
                         </div>
                     </a>
                 </div>

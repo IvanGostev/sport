@@ -14,23 +14,27 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <form class="row" action="{{route('admin.product.index')}}" style="display: flex ;align-items: flex-end">
+                                <form class="row" action="{{route('admin.product.index')}}"
+                                      style="display: flex ;align-items: flex-end">
                                     <div class="col-sm-12 col-md-2">
-                                        <a href="{{ route('admin.product.create') }}" class="btn btn-block btn-outline-light">Добавить</a>
+                                        <a href="{{ route('admin.product.create') }}"
+                                           class="btn btn-block btn-outline-light">Добавить</a>
                                         <br>
                                         <div>
                                             <div class="fw-bold fs-6">Название</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
-                                                    <input type="text" value="{{request()['title'] ?? ''}}" name="title" class="form-control" placeholder="Текст ...">
+                                                    <input type="text" value="{{request()['title'] ?? ''}}" name="title"
+                                                           class="form-control" placeholder="Текст ...">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12  col-md-2 d-flex gap-2">
                                         <button class="btn btn-light mt-3" tabindex="0"
-                                                aria-controls="example1" type="submit"  ><span>Поиск</span></button>
-                                        <a href="{{route('admin.product.index')}}" class="btn btn-secondary mt-3" tabindex="0"
+                                                aria-controls="example1" type="submit"><span>Поиск</span></button>
+                                        <a href="{{route('admin.product.index')}}" class="btn btn-secondary mt-3"
+                                           tabindex="0"
                                            aria-controls="example1" type="submit"><span>Сбросить</span></a>
                                     </div>
                                 </form>
@@ -46,6 +50,7 @@
                                         <th>Название</th>
                                         <th style="width: 40px">Описание</th>
                                         <th style="width: 40px">Цена</th>
+                                        <th style="width: 40px">Редактировать</th>
                                         <th style="width: 40px">Удалить</th>
                                     </tr>
                                     </thead>
@@ -53,12 +58,17 @@
                                     @foreach($products as $product)
                                         <tr>
                                             <td>
-                                                <img src="{{asset($product->image)}}"  style="height: 10rem">
+                                                <img src="{{asset($product->image)}}" style="height: 10rem">
                                             </td>
                                             <td>{{$product->title}}</td>
 
                                             <td>{{$product->description}}</td>
                                             <td>{{$product->price . ' руб'}}</td>
+                                            <td>
+                                                <a href="{{ route('admin.product.edit', $product->id) }}"
+                                                  class="btn btn-light btn-sm">Редактировать
+                                                </a>
+                                            </td>
                                             <td>
                                                 <form action="{{ route('admin.product.destroy', $product->id) }}"
                                                       method="post">

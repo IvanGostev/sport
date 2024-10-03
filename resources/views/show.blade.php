@@ -5,7 +5,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Аварийная информация') }}</div>
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <div class="row">
                         <table class="table table-hover text-nowrap">
                             <thead>

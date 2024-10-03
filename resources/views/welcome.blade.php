@@ -252,7 +252,8 @@
     <footer class="footer-section" style="padding: 0 0 0 0!important; ">
         <p class="text-center"> Авторское право ©
             <script>document.write(new Date().getFullYear());</script>
-            Все права защищены
+            Все права защищены <br>
+            <a href="{{route('terms')}}">Пользовательское соглашение и условия доставки</a>
         </p>
     </footer>
 

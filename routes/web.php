@@ -20,13 +20,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/subscriptions', [SubscriptionController::class, 'index'])->name('subscription.index');
-Route::get('/subscription', [SubscriptionController::class, 'show'])->name('subscription.show');
 
-Route::get('/terms-of-use',)->name('terms');
+
+Route::get('/terms-of-use', [MainController::class, 'terms'])->name('terms');
 
 Route::middleware('auth')->group(function ()
 {
+    Route::get('/subscriptions', [SubscriptionController::class, 'index'])->name('subscription.index');
+    Route::get('/subscription', [SubscriptionController::class, 'show'])->name('subscription.show');
+
     Route::get('/products', [ProductController::class, 'index'])->name('product.index');
     Route::get('/{product}/products', [ProductController::class, 'show'])->name('product.show');
 

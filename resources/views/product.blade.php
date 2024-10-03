@@ -8,7 +8,7 @@
                     <article class="gallery-wrap">
                         <div class="img-big-wrap" style="height: 50vh">
                             <div><img style="width: 100%; height: 50vh!important; border-radius:  0.375rem;"
-                                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=80">
+                                      src="{{asset($product->image)}}">
                             </div>
                         </div> <!-- slider-product.// -->
                     </article> <!-- gallery-wrap .end// -->
@@ -83,11 +83,10 @@
                                 <img src="{{$product->image}}" class="card-img-top" alt="{{$product->title}}">
                             </div>
 
-                            <div class="card-body" style="height: 14vh;
+                            <div class="card-body" style="height: 12vh;
     overflow: hidden;
     text-overflow: ellipsis; ">
                                 <h5 class="card-title">{{$product->title}}</h5>
-                                <p class="card-text">{{$product->description}}</p>
                             </div>
                         </a>
                     </div>
