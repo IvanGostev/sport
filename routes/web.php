@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\OrderAdminController;
 use App\Http\Controllers\Admin\ProductAdminController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -114,4 +115,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
 });
+
+Route::controller(PaymentController::class)->prefix('payment')->name('payment.')->group(function () {
+    Route::get('/', 'purchase')->name('notification');
+    Route::get('/notification', 'notification')->name('notification');
+});
+
+
 require __DIR__ . '/auth.php';

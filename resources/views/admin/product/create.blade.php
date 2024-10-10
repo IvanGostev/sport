@@ -28,7 +28,7 @@
                             <!-- form start -->
                             <form action="{{route('admin.product.store')}}" enctype="multipart/form-data" method="post">
                                 @csrf
-                                <div class="card-body">
+                                <div class="card-body table-responsive p-0">
 
                                     <div class="row">
                                         <div class="col-sm-6">

@@ -29,8 +29,7 @@
                             <form action="{{route('admin.product.update', $product->id)}}" enctype="multipart/form-data" method="post">
                                 @csrf
                                 @method('patch')
-                                <div class="card-body">
-
+                                <div class="card-body table-responsive p-0">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <!-- text input -->

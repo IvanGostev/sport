@@ -59,7 +59,12 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+<div class="row mb-3">
 
+    <a class="btn btn-link" href="{{ route('terms') }}">
+ {{ __('Нажимая зарегистрироваться, вы соглашаетесь с Пользовательским соглашение') }}
+    </a>
+</div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-outline-light">
