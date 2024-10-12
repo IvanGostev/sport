@@ -22,7 +22,7 @@ class PaymentController extends Controller
 
         $price = ($data['m'] == 1 ? 200.00 : 999.00);
         $client = new Client();
-        $client->setAuth('471468', 'test_fzCPF_GXiHBTQxd1bFZMP81CqK7CeeJGKGRH_88y1Ig');
+        $client->setAuth('471468', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
         $payment = $client->createPayment(
             [
                 'amount' => [
@@ -50,7 +50,7 @@ class PaymentController extends Controller
     public function purchaseOrder($order)
     {
         $client = new Client();
-        $client->setAuth('471468', 'test_fzCPF_GXiHBTQxd1bFZMP81CqK7CeeJGKGRH_88y1Ig');
+        $client->setAuth('415003', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
         $payment = $client->createPayment(
             [
                 'amount' => [
@@ -79,7 +79,7 @@ class PaymentController extends Controller
     public function notification(Request $request)
     {
 
-        Mail::to('ivangostev07@gmail.com')->send(new PaymentNotificationMail($request->all()));
+//        Mail::to('ivangostev07@gmail.com')->send(new PaymentNotificationMail($request->all()));
         $data = $request->all();
 
         if ($data['object']['status'] == 'succeeded') {
@@ -110,7 +110,7 @@ class PaymentController extends Controller
     public function renewal($user)
     {
         $client = new Client();
-        $client->setAuth('471468', 'test_fzCPF_GXiHBTQxd1bFZMP81CqK7CeeJGKGRH_88y1Ig');
+        $client->setAuth('415003', 'test_fzCPF_GXiHBTQxd1bFZMP81CqK7CeeJGKGRH_88y1Ig');
         $client->createPayment(
             array(
                 'amount' => array(
