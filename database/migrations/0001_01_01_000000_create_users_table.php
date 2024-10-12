@@ -22,6 +22,11 @@ return new class extends Migration
             $table->string('type')->default('standard');
             $table->string('img')->default('/images/placeholder.png');
             $table->longText('information')->nullable();
+
+
+            $table->smallInteger('paid')->default(0);
+            $table->smallInteger('autorenewal')->default(0);
+            $table->text('payment_method_id')->nullable();
             $table->integer('subscription_months')->nullable();
             $table->date('day_pay')->nullable(); // день в который оплатили
             $table->softDeletes();

@@ -117,8 +117,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::controller(PaymentController::class)->prefix('payment')->name('payment.')->group(function () {
-    Route::get('/', 'purchase')->name('notification');
-    Route::get('/notification', 'notification')->name('notification');
+    Route::post('/auto-renewal', 'autoRenewal')->name('auto-renewal');
+    Route::post('/purchase-subscription', 'purchaseSubscription')->name('purchase-subscription');
+    Route::post('/notification', 'notification')->name('notification');
 });
 
 

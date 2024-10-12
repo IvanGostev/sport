@@ -19,7 +19,8 @@
                                 <div class="card-header py-3">
                                     <h4 class="my-0 fw-normal">Месяц</h4>
                                 </div>
-                                <div class="card-body">
+                                <form class="card-body" action="{{route('payment.purchase-subscription')}}" method="post">
+                                    @csrf
                                     <h1 class="card-title pricing-card-title">200 руб</h1>
                                     <ul class="list-unstyled mt-3 mb-4">
                                         <li> Подписка позволяет пользователю получить доступ к услуге размещения на
@@ -41,8 +42,10 @@
                                             путешествия.
                                         </li>
                                     </ul>
+                                    <input hidden name="user_id" value="{{auth()->user()->id}}">
+                                    <input hidden name="m" value="1">
                                     <button type="button" class="w-100 btn btn-lg btn-primary">Приобрести</button>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <div class="col">
@@ -50,7 +53,8 @@
                                 <div class="card-header py-3 text-white bg-primary border-primary">
                                     <h4 class="my-0 fw-normal">Год</h4>
                                 </div>
-                                <div class="card-body">
+                                <form class="card-body" action="{{route('payment.purchase-subscription')}}" method="post">
+                                    @csrf
                                     <h1 class="card-title pricing-card-title">999 руб</h1>
                                     <ul class="list-unstyled mt-3 mb-4">
                                         <li>Подписка предоставляет доступ к контенту или услугам на целый год (365 дней)
@@ -73,8 +77,10 @@
                                             использовать сервис в течение года.
                                         </li>
                                     </ul>
-                                    <button type="button" class="w-100 btn btn-lg btn-primary">Приобрести</button>
-                                </div>
+                                    <input hidden name="user_id" value="{{auth()->user()->id}}">
+                                    <input hidden name="m" value="12">
+                                    <button type="submit" class="w-100 btn btn-lg btn-primary">Приобрести</button>
+                                </form>
                             </div>
                         </div>
                     </div>

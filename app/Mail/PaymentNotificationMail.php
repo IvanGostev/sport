@@ -38,7 +38,7 @@ class PaymentNotificationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mails.payment-notification',
+            html: 'mails.payment-notification',
         );
     }
 

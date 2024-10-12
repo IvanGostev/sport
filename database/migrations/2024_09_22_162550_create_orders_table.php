@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
             $table->longText('address');
-            $table->string('status')->default('В сборке');
-            $table->date('paid')->nullable();
+            $table->string('status')->default('Ожидает оплаты');
+            $table->date('paid')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -21,7 +21,7 @@ class OrderAdminController extends Controller
             $orders->where('status', 'LIKE', "%{$data['status']}%");
         }
 
-        $orders = $orders->latest()->paginate(10);
+        $orders = $orders->where('paid', 1)->latest()->paginate(10);
         return view('admin.order.index', compact('orders'));
     }
 
