@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained();
             $table->longText('address');
             $table->string('status')->default('Ожидает оплаты');
-            $table->date('paid')->default(0);
+            $table->smallInteger('paid')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
