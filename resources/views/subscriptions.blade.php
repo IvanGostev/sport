@@ -44,7 +44,7 @@
                                     </ul>
                                     <input hidden name="user_id" value="{{auth()->user()->id}}">
                                     <input hidden name="m" value="1">
-                                    <button type="button" class="w-100 btn btn-lg btn-primary">Приобрести</button>
+                                    <button type="submit" class="w-100 btn btn-lg btn-primary">Приобрести</button>
                                 </form>
                             </div>
                         </div>

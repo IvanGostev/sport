@@ -5,7 +5,7 @@
             <div class="container py-3">
                 <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
                     <h1 class="display-4 fw-normal">Моя подписка</h1>
-                    @if(auth()->user()->paid)
+                    @if(!auth()->user()->paid)
                         <p class="fs-5 text-muted">У вас нет подписки, ваш профиль не активен</p>
                         <a href="{{route('subscription.index')}}" class="fs-4 btn btn-light btn-block">Перейти к
                             тарифам</a>
@@ -18,9 +18,9 @@
                             <h5 class="card-title">Активна
                                 до {{auth()->user()->day_pay != null ? \Carbon\Carbon::create(auth()->user()->day_pay)->addMonths(auth()->user()->subscription_months)->toDateString() : '-' }}
                             </h5>
-                            <form class="card-text" action="{{route('paymnet.auto-renewal')}}" method="post">
+                            <form class="card-text" action="{{route('payment.auto-renewal')}}" method="post">
                                 @csrf
-                                <button class="btn btn-light">Отключить авто продление</button>
+                                <button class="btn btn-light">{{auth()->user()->autorenewal == 1 ? 'Отключить авто продление' : 'Включить авто продление'}}</button>
                             </form>
                         </div>
                     </div>

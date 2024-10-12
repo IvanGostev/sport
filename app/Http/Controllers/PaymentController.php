@@ -78,14 +78,14 @@ class PaymentController extends Controller
 
     public function notification(Request $request)
     {
+
         Mail::to('ivangostev07@gmail.com')->send(new PaymentNotificationMail($request->all()));
         $data = $request->all();
+
         if ($data['object']['status'] == 'succeeded') {
-
-            if ($data['metadata']['product_type'] == 'subscription') {
-
-                $user = User::where('id', $data['metadata']['user_id'])->first();
-                $user['payment_method_id'] = $data['payment_method']['id'];
+            if ($data['object']['metadata']['product_type'] == 'subscription') {
+                $user = User::where('id', $data['object']['metadata']['user_id'])->first();
+                $user['payment_method_id'] = $data['object']['payment_method']['id'];
 
                 if ($data['object']['amount']['value'] == '200.00') {
                     $user['subscription_months'] = 1;
@@ -96,8 +96,8 @@ class PaymentController extends Controller
                 $user['paid'] = 1;
 
                 $user->update();
-            } elseif ($data['metadata']['product_type'] == 'order') {
-                $order = Order::where('id', $data['metadata']['order_id'])->first();
+            } elseif ($data['object']['metadata']['product_type'] == 'order') {
+                $order = Order::where('id', $data['object']['metadata']['order_id'])->first();
                 $order['paid'] = 1;
                 $order['status'] = 'В сборке';
                 $order->update();
