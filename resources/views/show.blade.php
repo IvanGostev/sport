@@ -3,14 +3,14 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                @if(1)
+                @if($user->paid)
                     <div class="card">
                         <div class="card-header">{{ __('Аварийная информация') }}</div>
                         <div class="card-body table-responsive">
                             <div class="row">
                                 @foreach($user->contacts() as $contact)
                                 <div class="col-md-4 col-sm-6 col-12 pt-1">
-                                    <div class="light-box" style="background-color: #343a40; color: white; border-radius: 2.5%; ; ">
+                                    <div class="light-box" style="background-color: #343a40; color: white; border-radius: 2.5%">
                                         <div class="info-box-content" style="padding: 0.3rem">
                                             <span class="info-box-text">{{$contact->name}}</span>
                                             <br>
@@ -50,8 +50,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <label>Личная информация:</label>
-                                        <p placeholder="Текст ..." name="information" id="" cols="30"
-                                           rows="10">{{$user->information}}</p>
+                                        <p >{{$user->information}}</p>
                                     </div>
                                 </div>
                             @endif
