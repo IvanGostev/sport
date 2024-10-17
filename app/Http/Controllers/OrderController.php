@@ -13,8 +13,14 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $ordersActive = Order::where('status', '!=', 'Доставлен')->get();
-        $ordersDelivery = Order::where('status', 'Доставлен')->get();
+        $ordersActive = Order::where('user_id', auth()->user()->id)
+            ->where('paid', 1)
+            ->where('status', '!=', 'Доставлен')
+            ->latest()->get();
+        $ordersDelivery = Order::where('user_id', auth()->user()->id)
+            ->where('paid', 1)
+            ->where('status', 'Доставлен')
+            ->latest()->get();
         return view('orders', compact('ordersActive', 'ordersDelivery'));
     }
 
@@ -27,11 +33,14 @@ class OrderController extends Controller
     {
         try {
             DB::beginTransaction();
+            $products = Cart::instance('cart')->content();
+            if (count($products) < 1) {
+                return back();
+            }
             $order = Order::create([
                 'user_id' => auth()->user()->id,
                 'address' => $request->address
             ]);
-            $products = Cart::instance('cart')->content();
             foreach ($products as $product) {
                 OrderProduct::create([
                     'order_id' => $order->id,

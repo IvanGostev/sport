@@ -123,4 +123,4 @@ Route::controller(PaymentController::class)->prefix('payment')->name('payment.')
 });
 
 
-require __DIR__ . '/auth.php';
+Auth::routes();

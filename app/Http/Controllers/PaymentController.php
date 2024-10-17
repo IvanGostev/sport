@@ -19,10 +19,10 @@ class PaymentController extends Controller
             'm' => 'required',
             'user_id' => 'required',
         ]);
-
+        $user = User::where('id', $data['user_id'])->first();
         $price = ($data['m'] == 1 ? 200.00 : 999.00);
         $client = new Client();
-        $client->setAuth('471468', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
+        $client->setAuth('415003', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
         $payment = $client->createPayment(
             [
                 'amount' => [
@@ -40,6 +40,22 @@ class PaymentController extends Controller
                     'product_type' => 'subscription'
                 ],
                 'save_payment_method' => true,
+                'receipt' => [
+                    "customer" => [
+                        "email" => $user->email
+                    ],
+                    'items' => [
+                        [
+                            'description' => 'Подписка ' . $data['user_id'],
+                            "quantity" => 1,
+                            "amount" => [
+                                "value" => $price,
+                                "currency" => "RUB"
+                            ],
+                            "vat_code" => 1
+                        ],
+                    ]
+                ]
             ],
             uniqid('212', true)
         );
@@ -49,8 +65,21 @@ class PaymentController extends Controller
 
     public function purchaseOrder($order)
     {
+        $items = [];
+        foreach ($order->products() as $product) {
+            $items[] = [
+                'description' => $product->product()['title'],
+                "quantity" => $product['qty'],
+                "amount" => [
+                    "value" => $product->price,
+                    "currency" => "RUB"
+                ],
+                "vat_code" => 1
+            ];
+        }
         $client = new Client();
         $client->setAuth('415003', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
+
         $payment = $client->createPayment(
             [
                 'amount' => [
@@ -68,7 +97,12 @@ class PaymentController extends Controller
                     'order_id' => $order['id'],
                     'product_type' => 'order'
                 ],
-                'save_payment_method' => true,
+                'receipt' => [
+                    "customer" => [
+                        "email" => $order->user()->email
+                    ],
+                    'items' => $items
+                ]
             ],
             uniqid('121', true)
         );
@@ -110,7 +144,7 @@ class PaymentController extends Controller
     public function renewal($user)
     {
         $client = new Client();
-        $client->setAuth('415003', 'test_fzCPF_GXiHBTQxd1bFZMP81CqK7CeeJGKGRH_88y1Ig');
+        $client->setAuth('415003', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
         $client->createPayment(
             array(
                 'amount' => array(
@@ -129,7 +163,8 @@ class PaymentController extends Controller
         );
     }
 
-    public function autoRenewal() {
+    public function autoRenewal()
+    {
         $user = auth()->user();
         if ($user['autorenewal'] == 1) {
             $user['autorenewal'] = 0;

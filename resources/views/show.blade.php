@@ -3,31 +3,30 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                @if($user->paid)
+                @if(1)
                     <div class="card">
                         <div class="card-header">{{ __('Аварийная информация') }}</div>
                         <div class="card-body table-responsive">
                             <div class="row">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>Имя</th>
-                                        <th>Кем приходиться</th>
-                                        <th>Тип контакта</th>
-                                        <th>Контакт</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($user->contacts() as $contact)
-                                        <tr>
-                                            <td>{{$contact->name}}</td>
-                                            <td>{{$contact->role}}</td>
-                                            <td>{{$contact->type}}</td>
-                                            <td>{{$contact->contact}}</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                @foreach($user->contacts() as $contact)
+                                <div class="col-md-4 col-sm-6 col-12 pt-1">
+                                    <div class="light-box" style="background-color: #343a40; color: white; border-radius: 2.5%; ; ">
+                                        <div class="info-box-content" style="padding: 0.3rem">
+                                            <span class="info-box-text">{{$contact->name}}</span>
+                                            <br>
+                                            <span class="info-box-text">{{$contact->role}}</span>
+                                            <br>
+                                            <span class="info-box-text">{{$contact->type}}: </span>
+                                            <span class="info-box-text">{{$contact->contact}}</span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                @endforeach
+
+
+
                             </div>
                             @if($user->type == 'standard')
                                 <div class="row">
