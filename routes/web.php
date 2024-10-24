@@ -117,6 +117,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::controller(PaymentController::class)->prefix('payment')->name('payment.')->group(function () {
+    Route::post('/period-test', 'test')->name('test');
     Route::post('/auto-renewal', 'autoRenewal')->name('auto-renewal');
     Route::post('/purchase-subscription', 'purchaseSubscription')->name('purchase-subscription');
     Route::post('/notification', 'notification')->name('notification');

@@ -21,7 +21,7 @@
                                 </div>
                                 <form class="card-body" action="{{route('payment.purchase-subscription')}}" method="post">
                                     @csrf
-                                    <h1 class="card-title pricing-card-title">200 руб</h1>
+                                    <h1 class="card-title pricing-card-title">99 руб</h1>
                                     <ul class="list-unstyled mt-3 mb-4">
                                         <li> Подписка позволяет пользователю получить доступ к услуге размещения на
                                             протяжении одного месяца (30 дней)

@@ -13,15 +13,21 @@
                 @else
                     <div class="card">
                         <h5 class="card-header">Мой
-                            тариф: {{auth()->user()->subscription_months . auth()->user()->subscription_months != 1 ? 'месяцев' : 'месяц' }} </h5>
+                            тариф: {{auth()->user()->subscription_days . ' дней' }} </h5>
                         <div class="card-body">
                             <h5 class="card-title">Активна
-                                до {{auth()->user()->day_pay != null ? \Carbon\Carbon::create(auth()->user()->day_pay)->addMonths(auth()->user()->subscription_months)->toDateString() : '-' }}
+                                до {{auth()->user()->day_pay != null ? \Carbon\Carbon::create(auth()->user()->day_pay)->addDays(auth()->user()->subscription_days)->toDateString() : '-' }}
                             </h5>
+                            @if (auth()->user()->subscription_days != 3)
                             <form class="card-text" action="{{route('payment.auto-renewal')}}" method="post">
                                 @csrf
                                 <button class="btn btn-light">{{auth()->user()->autorenewal == 1 ? 'Отключить авто продление' : 'Включить авто продление'}}</button>
                             </form>
+                            @else
+                                <div class="card-text" >
+                                    <a href="{{route('subscription.index')}}" class="btn btn-light">Купить полную подписку</a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 @endif

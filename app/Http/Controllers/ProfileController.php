@@ -10,12 +10,18 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ProfileController extends Controller
 {
-
     public function show() {
-        $qrcode = QrCode::size(200)->style('square')->generate(route('main.show', auth()->user()->id));
-        return view('profile', compact('qrcode'));
-    }
+        $userId = auth()->user()->id;
+        $qrcode = QrCode::size(200)->style('square')->generate(route('main.show', $userId));
+        if (file_exists('qrcodes/qrcode_' . $userId . '.svg')) {
+            $path = 'public/qrcodes/qrcode_' . $userId . '.svg';
+        } else {
+            $path = public_path('qrcodes/qrcode_' . $userId . '.svg');
+            \SimpleSoftwareIO\QrCode\Facades\QrCode::size(250)->style('round')->generate(route('main.show', $userId), $path);
+        }
 
+        return view('profile', compact('qrcode', 'path'));
+    }
 
     public function update(Request $request) {
         $data = $request->validate([
@@ -31,4 +37,6 @@ class ProfileController extends Controller
         auth()->user()->update($data);
         return back();
     }
+
+
 }

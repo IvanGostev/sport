@@ -24,10 +24,11 @@ return new class extends Migration
             $table->longText('information')->nullable();
 
 
+            $table->smallInteger('test_period')->default(0);
             $table->smallInteger('paid')->default(0);
             $table->smallInteger('autorenewal')->default(0);
             $table->text('payment_method_id')->nullable();
-            $table->integer('subscription_months')->nullable();
+            $table->integer('subscription_days')->nullable();
             $table->date('day_pay')->nullable(); // день в который оплатили
             $table->softDeletes();
             $table->rememberToken();

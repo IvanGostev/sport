@@ -30,12 +30,12 @@
                             </div>
                             @if($user->type == 'standard')
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group" style="width: 200px">
-                                            <img src="{{asset($user->img)}}" alt="" style="width: 100%">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
+{{--                                    <div class="col-sm-6">--}}
+{{--                                        <div class="form-group" style="width: 200px">--}}
+{{--                                            <img src="{{asset($user->img)}}" alt="" style="width: 100%">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>Имя:</label>
                                             <h6>{{$user->name}}</h6>

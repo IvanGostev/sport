@@ -29,7 +29,7 @@ class CheckSubscriptionCommand extends Command
     {
         $users = User::where('paid', 1)->get();
         foreach ($users as &$user) {
-            if (Carbon::create($user->created_at)->addMonths($user->subscription_months) < Carbon::now()) {
+            if (Carbon::create($user->day_pay)->addDays($user->subscription_days) < Carbon::now()) {
                 $user->paid = 0;
                 $user->update();
             }

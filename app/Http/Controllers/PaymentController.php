@@ -20,7 +20,7 @@ class PaymentController extends Controller
             'user_id' => 'required',
         ]);
         $user = User::where('id', $data['user_id'])->first();
-        $price = ($data['m'] == 1 ? 200.00 : 999.00);
+        $price = ($data['m'] == 1 ? 99.00 : 999.00);
         $client = new Client();
         $client->setAuth('415003', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
         $payment = $client->createPayment(
@@ -52,7 +52,9 @@ class PaymentController extends Controller
                                 "value" => $price,
                                 "currency" => "RUB"
                             ],
-                            "vat_code" => 1
+                            "vat_code" => 1,
+                            "payment_subject" => "service",
+                            'payment_mode' => 'full_payment',
                         ],
                     ]
                 ]
@@ -74,7 +76,9 @@ class PaymentController extends Controller
                     "value" => $product->price,
                     "currency" => "RUB"
                 ],
-                "vat_code" => 1
+                "vat_code" => 1,
+                "payment_subject" => "commodity",
+                'payment_mode' => 'full_payment',
             ];
         }
         $client = new Client();
@@ -121,10 +125,10 @@ class PaymentController extends Controller
                 $user = User::where('id', $data['object']['metadata']['user_id'])->first();
                 $user['payment_method_id'] = $data['object']['payment_method']['id'];
 
-                if ($data['object']['amount']['value'] == '200.00') {
-                    $user['subscription_months'] = 1;
+                if ($data['object']['amount']['value'] == '99.00') {
+                    $user['subscription_days'] = 30;
                 } elseif ($data['object']['amount']['value'] == '999.00') {
-                    $user['subscription_months'] = 12;
+                    $user['subscription_days'] = 360;
                 }
                 $user['day_pay'] = Carbon::now()->toDateString();
                 $user['paid'] = 1;
@@ -148,7 +152,7 @@ class PaymentController extends Controller
         $client->createPayment(
             array(
                 'amount' => array(
-                    'value' => $user['subscription_months'] == 1 ? 200.00 : 999.00,
+                    'value' => $user['subscription_days'] == 1 ? 99.00 : 999.00,
                     'currency' => 'RUB',
                 ),
                 "metadata" => [
@@ -172,6 +176,19 @@ class PaymentController extends Controller
             $user['autorenewal'] = 1;
         }
         $user->update();
+        return back();
+    }
+
+
+    public function test() {
+        $user = auth()->user();
+        if (!$user->test_period) {
+            $user['test_period'] = 1;
+            $user['day_pay'] = Carbon::now()->toDateString();
+            $user['paid'] = 1;
+            $user['subscription_days'] = 3;
+            $user->update();
+        }
         return back();
     }
 
