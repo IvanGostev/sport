@@ -74,7 +74,7 @@
                                         <th style="width: 40px">Email</th>
                                         <th style="width: 40px">Телефон</th>
                                         <th style="width: 40px">Статус подписки</th>
-                                        <th style="width: 40px">Куплена на</th>
+                                        <th style="width: 40px">Дней</th>
                                         <th style="width: 40px">Активна до</th>
                                         <th style="width: 40px">Удалить</th>
                                     </tr>
@@ -86,8 +86,8 @@
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->phone}}</td>
                                             <td>{{$user->day_pay != null ? 'Оплачена ' . $user->day_pay : 'Не оплачена'}}</td>
-                                            <td>{{$user->subscription_months ?? '-'}}</td>
-                                            <td>{{$user->day_pay != null ? \Carbon\Carbon::create($user->day_pay)->addMonths($user->subscription_months)->toDateString() : '-' }}</td>
+                                            <td>{{$user->subscription_days ?? '-'}}</td>
+                                            <td>{{$user->day_pay != null ? \Carbon\Carbon::create($user->day_pay)->addDays($user->subscription_days)->toDateString() : '-' }}</td>
                                             <td>
                                                 <form action="{{ route('admin.user.destroy', $user->id) }}"
                                                       method="post">

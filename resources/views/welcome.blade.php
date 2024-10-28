@@ -77,7 +77,7 @@
 
             <div class="row align-items-center">
                 <div class="col-lg-12 mx-auto text-center" data-aos="fade-up">
-                    <h1 class="mb-3">Qrcode</h1>
+                    <h1 class="mb-3">QR-код</h1>
                     <p class="lead mx-auto desc mb-5">Аварийный QR-код для — это инструмент, который
                         может предоставить множество преимуществ в случае экстренных ситуаций.
                     </p>
