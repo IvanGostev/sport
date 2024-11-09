@@ -22,7 +22,9 @@ class PaymentController extends Controller
         $user = User::where('id', $data['user_id'])->first();
         $price = ($data['m'] == 1 ? 30.00 : 365.00);
         $client = new Client();
-        $client->setAuth('415003', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
+
+//        $client->setAuth('415003', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
+        $client->setAuth('471468', 'test_fzCPF_GXiHBTQxd1bFZMP81CqK7CeeJGKGRH_88y1Ig');
         $payment = $client->createPayment(
             [
                 'amount' => [
@@ -82,8 +84,8 @@ class PaymentController extends Controller
             ];
         }
         $client = new Client();
-        $client->setAuth('415003', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
-
+//        $client->setAuth('415003', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
+        $client->setAuth('471468', 'test_fzCPF_GXiHBTQxd1bFZMP81CqK7CeeJGKGRH_88y1Ig');
         $payment = $client->createPayment(
             [
                 'amount' => [
@@ -139,6 +141,21 @@ class PaymentController extends Controller
                 $order['paid'] = 1;
                 $order['status'] = 'В сборке';
                 $order->update();
+                $data = [];
+                $data['order_id'] = $order['id'];
+                $data['platform_id'] = $order['platform_id'];
+                $data['name'] = $order->user()['name'];
+                $data['phone'] = '+' . ltrim($order->user()['phone'], '+');
+                foreach ($order->products() as $product) {
+                    $data['products'][] =
+                        [
+                            "count" => $product['qty'],
+                            "title" => $product->product()['title'],
+                            "price" => $product['price'],
+                        ];
+                }
+                $delivery = new DeliveryController();
+                $delivery->create($data, $order);
             }
         }
 
@@ -148,7 +165,8 @@ class PaymentController extends Controller
     public function renewal($user)
     {
         $client = new Client();
-        $client->setAuth('415003', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
+//        $client->setAuth('415003', 'live_sz-3hg8Fuu4b5V7ADMrP2UJ-KAsAAKZpEsYRaOts3C0');
+        $client->setAuth('471468', 'test_fzCPF_GXiHBTQxd1bFZMP81CqK7CeeJGKGRH_88y1Ig');
         $client->createPayment(
             array(
                 'amount' => array(
